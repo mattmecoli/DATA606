@@ -1,0 +1,137 @@
+---
+title: "Chapter 1 - Introduction to Data"
+author: ''
+output:
+  html_document:
+    df_print: paged
+  pdf_document:
+    extra_dependencies:
+    - geometry
+    - multicol
+    - multirow
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+**Smoking habits of UK residents**. (1.10, p. 20) A survey was conducted to study the smoking habits of UK residents. Below is a data matrix displaying a portion of the data collected in this survey. Note that "$\pounds$" stands for British Pounds Sterling, "cig" stands for cigarettes, and "N/A" refers to a missing component of the data.
+
+\begin{center}
+\scriptsize{
+\begin{tabular}{rccccccc}
+\hline
+	& sex 	 & age 	& marital 	& grossIncome 					     & smoke & amtWeekends	& amtWeekdays \\ 
+\hline
+1 	& Female & 42 	& Single 	& Under $\pounds$2,600 			     & Yes 	 & 12 cig/day   & 12 cig/day \\ 
+2 	& Male	 & 44	& Single 	& $\pounds$10,400 to $\pounds$15,600 & No	 & N/A 			& N/A \\ 
+3 	& Male 	 & 53 	& Married   & Above $\pounds$36,400 		     & Yes 	 & 6 cig/day 	& 6 cig/day \\ 
+\vdots & \vdots & \vdots & \vdots & \vdots 				             & \vdots & \vdots 	    & \vdots \\ 
+1691 & Male  & 40   & Single 	& $\pounds$2,600 to $\pounds$5,200   & Yes 	 & 8 cig/day 	& 8 cig/day \\   
+\hline
+\end{tabular}
+}
+\end{center}
+
+
+(a) What does each row of the data matrix represent?
+
+> A UK resident. 
+
+(b) How many participants were included in the survey?
+
+> 1,691. 
+
+(c) Indicate whether each variable in the study is numerical or categorical. If numerical, identify as continuous or discrete. If categorical, indicate if the variable is ordinal.
+
+> Sex, martial, smoke are nominal categorical variable. grossIncome, amtWeekends, amtWeekdays are ordinal variables because they have a natural hierarchy if we choose to treat them that way. Age is a continuous, numerical variable. 
+
+```{r, eval=FALSE, echo=FALSE}
+# NOTE: It is not absolutely necessary to load the data to answer these 
+# questions, but is here for further exploration. 
+if(!file.exists('11263-Smoking_tcm86-13253.xls')) {
+	download.file('https://github.com/jbryer/DATA606Fall2019/blob/master/course_data/11263-Smoking_tcm86-13253.xls?raw=true', 
+				  destfile = '11263-Smoking_tcm86-13253.xls')
+}
+smoking <- readxl::read_excel('11263-Smoking_tcm86-13253.xls')
+```
+
+
+
+
+
+--------------------------------------------------------------------------------
+
+\clearpage
+
+**Cheaters, scope of inference**. (1.14, p. 29) Exercise 1.5 introduces a study where researchers studying the relationship between honesty, age, and self-control conducted an experiment on 160 children between the ages of 5 and 15[^1]. The researchers asked each child to toss a fair coin in private and to record the outcome (white or black) on a paper sheet, and said they would only reward children who report white. Half the students were explicitly told not to cheat and the others were not given any explicit instructions. Differences were observed in the cheating rates in the instruction and no instruction groups, as well as some differences across children's characteristics within each group.
+
+(a) Identify the population of interest and the sample in this study.
+
+> Children between the ages of 5 and 15. The sample is the 160 children who participated in the study. 
+
+(b) Comment on whether or not the results of the study can be generalized to the population, and
+if the findings of the study can be used to establish causal relationships.
+
+> Yes, they can be generalized to the overall population (children aged 5-15) because it was a randomly sampled group from the population, and it could be used to establish a causual relationship because it is an experiment and not an observational study. 
+
+[^1]: Alessandro Bucciol and Marco Piovesan. "Luck or cheating? A field experiment on honesty with children". In: Journal of Economic Psychology 32.1 (2011), pp. 73-78. Available at https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1307694
+
+
+
+--------------------------------------------------------------------------------
+
+\clearpage
+
+**Reading the paper**. (1.28, p. 31) Below are excerpts from two articles published in the NY Times:
+
+(a) An article titled Risks: Smokers Found More Prone to Dementia states the following:
+
+"Researchers analyzed data from 23,123 health plan members who participated in a voluntary exam and health behavior survey from 1978 to 1985, when they were 50-60 years old. 23 years later, about 25% of the group had dementia, including 1,136 with Alzheimer's disease and 416 with vascular dementia. After adjusting for other factors, the researchers concluded that pack-a- day smokers were 37% more likely than nonsmokers to develop dementia, and the risks went up with increased smoking; 44% for one to two packs a day; and twice the risk for more than two packs."
+
+Based on this study, can we conclude that smoking causes dementia later in life? Explain your reasoning.
+
+> No, we can not determine a causal relationship despite the strong correlative results because 1) we do not have a random sample and 2) this was not an experiment but an observational study. The association itself might be telling but correlation is not causation.  
+
+(b) Another article titled The School Bully Is Sleepy states the following:
+
+"The University of Michigan study, collected survey data from parents on each child's sleep habits and asked both parents and teachers to assess behavioral concerns. About a third of the students studied were identified by parents or teachers as having problems with disruptive behavior or bullying. The researchers found that children who had behavioral issues and those who were identified as bullies were twice as likely to have shown symptoms of sleep disorders."
+
+A friend of yours who read the article says, "The study shows that sleep disorders lead to bullying in school children." Is this statement justified? If not, how best can you describe the conclusion that can be drawn from this study?
+
+> No, the statement is not justified. There could easily be a confounding variable, the relationship could be reversed, or the association could be invalid. The best way to describe the conclusion would be to say the study found a correlation between behaviorial issues and bullying and symptoms of sleep disorders. 
+
+
+
+--------------------------------------------------------------------------------
+
+\clearpage
+
+**Exercise and mental health.** (1.34, p. 35) A researcher is interested in the effects of exercise on mental health and he proposes the following study: Use stratified random sampling to ensure rep- resentative proportions of 18-30, 31-40 and 41-55 year olds from the population. Next, randomly assign half the subjects from each age group to exercise twice a week, and instruct the rest not to exercise. Conduct a mental health exam at the beginning and at the end of the study, and compare the results.
+
+(a) What type of study is this?
+
+> An experiment because some of the sampled group are receiving a treatment, in this case exercising twice a week versus not. 
+
+(b) What are the treatment and control groups in this study?
+
+> Treatment group: exercise twice a week
+Control group: do not exercise. 
+
+(c) Does this study make use of blocking? If so, what is the blocking variable?
+
+> Age is the blocking variable here, into three strata. 
+(d) Does this study make use of blinding?
+
+> The study does not make use of blinding. Because the control group receives no placebo treatment, they are aware they are not in the treatment group. It's not entirely clear if those conducting the experiments have any blinding, but since the subjects aren't blind it seems unlikely. 
+
+(e) Comment on whether or not the results of the study can be used to establish a causal rela- tionship between exercise and mental health, and indicate whether or not the conclusions can be generalized to the population at large.
+
+> This study could be used to establish causal relationships because we have treatment and non-treatment groups, although the lack of blinding might warrant some caution (perhaps learning they weren't in the treatment group caused some subjects to exhibit negative mental health indicators). We could generalize to the population of 18-55 year olds because there was random sampling within the three blocked subsets. It might be good to look at the results within each block when generalizing. 
+
+(f) Suppose you are given the task of determining if this proposed study should get funding. Would you have any reservations about the study proposal?
+
+> Yes, I would have reservations. One of my reservations would be that the study isn't blinded at all. Perhaps assigning the control group to exercise once a week or only go for a walk or something similar. That also raises some questions about whether the study is specific enough. 'Exercise twice a week' doesn't specify what type of exercise. Two walks a week would be different than 2 ten mile runs or 2 bike rides or 2 yoga classes. 
+
+> This study also doesn't take into consideration how much exercises the subjects were doing before. If someone is exercising 5 times a week and then they only exercise two, we might see a decrease in mental health indicators that isn't actually valid for what we're testing for. Finally, I'm uncertain stratified random sampling is necessary. I would want more information on why we're blocking and why we're blocking by age (and not sex, current mental health, income level, or current fitness level for example).
+
